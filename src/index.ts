@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { NodeSarcoClient } from "sarcophagus-v2-sdk/node";
+import { NodeSarcoClient } from "sarcophagus-v2-sdk";
 dotenv.config();
 
 const privateKey = process.env.PRIVATE_KEY ?? "";
