@@ -5,6 +5,9 @@ import {
   ChunkingUploader,
   NodeSarcoClient,
 } from "sarcophagus-v2-sdk";
+import fetch from "node-fetch";
+
+globalThis.fetch = fetch as any;
 
 // Set up environment variables
 // Be sure to define these in your .env
@@ -22,12 +25,8 @@ async function main() {
   const sarcophagusName = "SDK Sarcophagus"; // the name of the sarcophagus
   const fileName = "hello_world.txt"; // the name of the file to upload
   const fileContents = "Hello World!"; // the contents of the file to upload
-  const archaeologistAddresses = [
-    "0x7cff7c3c1f150a59a202cf5ec1bb8b57908e385e",
-    "0x8a8a2d79ecab5705697b44cc20e97299a53ca86e",
-    "0x2f3be3c471fe133c47c1f2a805b65b7f38eaa5eb",
-  ]; // the addresses of the archaeologists to use
-  const requiredArchaeologistCount = 2; // the number of archaeologists required to resurrect
+  const archaeologistAddresses = ["0x7cff7c3c1f150a59a202cf5ec1bb8b57908e385e"]; // the addresses of the archaeologists to use
+  const requiredArchaeologistCount = 1; // the number of archaeologists required to resurrect
   const resurrectionTime = Date.now() + 1000 * 60 * 60 * 24 * 7; // the resurrection time in milliseconds
 
   // Create random wallets for the payload and recipient just for this example
@@ -47,7 +46,7 @@ async function main() {
   console.log("\n2. Get Archaeologist Profiles");
   console.log("Getting archaeologist profiles...");
   const archaeologists = await sarco.archaeologist
-    .getFullArchProfiles(archaeologistAddresses, true)
+    .getFullArchProfiles(archaeologistAddresses, false)
     .catch((error) => {
       console.error("Failed to get archaeologist profiles");
       throw error;
